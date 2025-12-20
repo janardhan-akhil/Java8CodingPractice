@@ -3,8 +3,6 @@ package com.streams;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.max;
-import static java.util.Collections.synchronizedSortedMap;
 
 public class Main {
     public static void main(String[] args) {
@@ -150,9 +148,10 @@ public class Main {
         System.out.println("list of distinct departments");
         employees.stream().map(Employee::getDepartment).distinct().forEach(System.out::println);
 
-
-
-
+//        25. Create a list of employee names in uppercase.
+        System.out.println("list of employee names in uppercase");
+        List<String> list = employees.stream().map(e -> e.getName().toUpperCase()).toList();
+        System.out.println(list);
 
 
     }
