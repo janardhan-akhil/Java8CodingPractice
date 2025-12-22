@@ -164,10 +164,53 @@ public class Main {
                 .filter(e -> e.getDepartment().equals("HR"))
                 .findAny().ifPresent(dept -> System.out.println("There is at least one employee from HR department: " + dept));
 
-//        28. Check if any employee who earns more than 1L
-        System.out.println("Checking if any employee earning more than 1L");
-        List<Employee> list1 = employees.stream().filter(e -> e.getSalary() > 80000).toList();
-        System.out.println(list1);
+//        28. Check if any employee who earns more than 80k
+        System.out.println("Checking if any employee earning more than 80k");
+        boolean b1 = employees.stream().anyMatch(e -> e.getSalary() > 80000);
+        System.out.println("Any employee earning more than 80k: " + b1);
+
+//        29. Check if all employees earn more than 30000
+        System.out.println("Checking if all employees earn more than 30000:");
+        boolean b = employees.stream().allMatch(e -> e.getSalary() > 30000);
+        System.out.println("All employees earning more than 30000: " + b);
+
+//        30. Check if no employees are from the Legal department.
+        System.out.println("Checking if no employees are from the Legal department:");
+        boolean legal = employees.stream().noneMatch(e -> e.getDepartment().equals("Legal"));
+        System.out.println("No employees in Legal department: " + legal);
+
+//        31. Get First Employee in sorted salary list
+        System.out.println("First Employee in sorted salary list:");
+        employees.stream().sorted(Comparator.comparing(Employee::getSalary)).findFirst()
+                .ifPresent(emp -> System.out.println("First employee in sorted salary list"+ emp));
+
+//        32. Get Second Highest paid employee
+        System.out.println("Second highest paid employee:");
+        employees.stream().sorted(Comparator.comparing(Employee::getSalary).reversed())
+                .skip(1).findFirst().ifPresent(emp -> System.out.println("Second highest paid employee: " + emp));
+
+//        33. Get Highest paid employee in IT department
+        System.out.println("Highest paid employee in IT department:");
+        employees.stream().filter(e-> e.getDepartment().equals("IT"))
+                .sorted(Comparator.comparing(Employee::getSalary).reversed())
+                .findFirst().ifPresent(emp -> System.out.println("Highest paid employee in IT department: " + emp));
+
+
+//        34. Get the department with the highest average salary.
+        System.out.println("Department with highest average salary:");
+        Optional<Map.Entry<String, Double>> max = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary)))
+                .entrySet().stream().max(Map.Entry.comparingByValue());
+        System.out.println(max);
+
+        Map<Boolean, List<Employee>> collect6 = employees.stream().collect(Collectors.partitioningBy(e -> e.getSalary() > 60000));
+        for(Map.Entry<Boolean, List<Employee>> entry : collect6.entrySet()){
+            if(entry.getKey()){
+                System.out.println("Employees with salary greater than 60000: " + entry.getValue());
+            } else {
+                System.out.println("Employees with salary less than or equal to 60000: " + entry.getValue());
+            }
+        }
 
 
     }
