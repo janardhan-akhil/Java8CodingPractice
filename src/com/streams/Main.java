@@ -153,6 +153,22 @@ public class Main {
         List<String> list = employees.stream().map(e -> e.getName().toUpperCase()).toList();
         System.out.println(list);
 
+//        26. Join all employee names into a single string separated by commas.
+        System.out.println("Joining all employee names into a single string separated by commas:");
+        String collect5 = employees.stream().map(Employee::getName).collect(Collectors.joining(","));
+        System.out.println("All employee names joined: " + collect5);
+
+//        27. Check if any employee is from the HR department.
+        System.out.println("Checking if any employee is from the HR department:");
+        employees.stream()
+                .filter(e -> e.getDepartment().equals("HR"))
+                .findAny().ifPresent(dept -> System.out.println("There is at least one employee from HR department: " + dept));
+
+//        28. Check if any employee who earns more than 1L
+        System.out.println("Checking if any employee earning more than 1L");
+        List<Employee> list1 = employees.stream().filter(e -> e.getSalary() > 80000).toList();
+        System.out.println(list1);
+
 
     }
 }
