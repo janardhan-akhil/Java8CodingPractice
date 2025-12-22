@@ -203,6 +203,8 @@ public class Main {
                 .entrySet().stream().max(Map.Entry.comparingByValue());
         System.out.println(max);
 
+//        35. Partiton employees by salary > 60k
+        System.out.println("Partitoning employees by salary > 60k:");
         Map<Boolean, List<Employee>> collect6 = employees.stream().collect(Collectors.partitioningBy(e -> e.getSalary() > 60000));
         for(Map.Entry<Boolean, List<Employee>> entry : collect6.entrySet()){
             if(entry.getKey()){
