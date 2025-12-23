@@ -214,6 +214,18 @@ public class Main {
             }
         }
 
+//        36. Group employees by salary range (e.g., low, medium, high).
+        System.out.println("Grouping employees by salary range:");
+        Map<String, List<Employee>> collect7 = employees.stream().collect(Collectors.groupingBy(e -> {
+            if (e.getSalary() < 50000) return "LOW SALARY";
+            else if (e.getSalary() < 70000) return "MEDIUM SALARY";
+            else return "HIGH SALARY";
+        }));
+        System.out.println(collect7);
 
+//        37. Calculate the total salary of all employees using reduce.
+        System.out.println("Total salary of all employees using reduce:");
+        Double reduce = employees.stream().map(Employee::getSalary).reduce(0.0, Double::sum);
+        System.out.println("Total salary of all employees: " + reduce);
     }
 }
