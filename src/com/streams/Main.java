@@ -2,6 +2,7 @@ package com.streams;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class Main {
@@ -227,5 +228,12 @@ public class Main {
         System.out.println("Total salary of all employees using reduce:");
         Double reduce = employees.stream().map(Employee::getSalary).reduce(0.0, Double::sum);
         System.out.println("Total salary of all employees: " + reduce);
+
+        Optional<Employee> reduce1 = employees.stream()
+                .reduce((e1, e2) ->
+                        e1.getName().length() > e2.getName().length() ? e1 : e2);
+        System.out.println(reduce1);
+
+
     }
 }
