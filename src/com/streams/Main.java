@@ -229,11 +229,11 @@ public class Main {
         Double reduce = employees.stream().map(Employee::getSalary).reduce(0.0, Double::sum);
         System.out.println("Total salary of all employees: " + reduce);
 
+//        38. Find the employee with the longest name using reduce.
+        System.out.println("Employee with the longest name using reduce:");
         Optional<Employee> reduce1 = employees.stream()
                 .reduce((e1, e2) ->
                         e1.getName().length() > e2.getName().length() ? e1 : e2);
         System.out.println(reduce1);
-
-
     }
 }
